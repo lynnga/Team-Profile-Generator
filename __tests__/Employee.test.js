@@ -19,3 +19,8 @@ test("can set email in employee object", () => {
   const employee = new Employee("Lin", 30, "lingamliel@gmail.com");
   expect(employee.email).toBe("lingamliel@gmail.com");
 });
+
+test('can get name from getName() method', () =>{
+const employee = new Employee("Lin", 30, "lingamliel@gmail.com");
+expect(employee.getName()).toBe("Lin");
+});

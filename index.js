@@ -2,8 +2,10 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 const path = require("path");
 const Manager = require("./lib/Manager");
+const Engineer = require ("./lib/Engineer")
 
 const templates = require("./src/templates");
+
 const DIST = path.resolve(__dirname, "dist");
 const PATH = path.join(DIST, "team.html");
 
@@ -19,7 +21,7 @@ function main() {
       managerOfficeNumber
     );
     team.push(manager);
-    createTeam()
+    createTeam();
   });
 }
 
@@ -47,7 +49,6 @@ function createManager() {
       message: "what is the manager's office number?",
     },
   ]);
-  
 }
 
 function createEngineer() {
@@ -55,22 +56,22 @@ function createEngineer() {
     {
       type: "input",
       name: "engineerName",
-      message: "What is the engineer\'s name?"
+      message: "What is the engineer's name?",
     },
     {
       type: "input",
       name: "engineerId",
-      message: "what is the engineer\'s id?",
+      message: "what is the engineer's id?",
     },
     {
       type: "input",
       name: "engineerEmail",
-      message: "what is the engineer\'s email?",
+      message: "what is the engineer's email?",
     },
     {
       type: "input",
       name: "github",
-      message: "what is the engineer\'s Github?",
+      message: "what is the engineer's Github?",
     },
   ]);
 }
@@ -80,16 +81,24 @@ function createTeam() {
       {
         type: "list",
         name: "teamMemeberChoice",
-        message: "which type of team memeber would you like to add?",
+        message: "which type of team member would you like to add?",
         choices: ["Engineer", "Intern", "I have finished my team"],
       },
     ])
     .then((answers) => {
       switch (answers.teamMemberChoice) {
         case "Engineer":
-          createEngineer().then(answers =>
-            {console.log('test')
-          })
+          createEngineer().then((answers) => {
+            const { engineerName, engineerId, engineerEmail, github } = answers;
+            const engineer = new Engineer(
+              engineerName,
+              engineerId,
+              engineerEmail,
+              github
+            );
+            team.push(engineer);
+            createTeam ();
+          });
           break;
         case "Intern":
           break;
@@ -100,17 +109,17 @@ function createTeam() {
 }
 function createHTML(teamArr) {
   let htmlMain = ``;
-  teamArr.forEach(teamMember => {
+  teamArr.forEach((teamMember) => {
     if (teamMember.getRole() === "Manager") {
       htmlMain = htmlMain + templates.managerTemplate(teamMember);
     }
-
-    
+    if(teamMember.getRole() ==="Engineer")
+    htmlMain = htmlMain + templates.engineerTemplate(teamMember)
   });
-  return htmlMain
+  return htmlMain;
 }
 function buildTeam() {
-  fs.writeFileSync(PATH, createHTML(team), 'utf-8');
+  fs.writeFileSync(PATH, createHTML(team), "utf-8");
 }
 
 main();

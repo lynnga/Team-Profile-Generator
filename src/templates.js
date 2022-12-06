@@ -30,5 +30,21 @@ const managerTemplate = (manager) => {
     <div> Office Number: ${officeNumber}</div>
     `;
 };
+const internTemplate = (intern) => {
+ 
+  const name = intern.name;
+  const id = intern.employee_id;
+  const email = intern.email;
+  const role = intern.getRole();
+  const school = intern.getSchool();
 
-module.exports = { engineerTemplate, managerTemplate };
+  return `
+<h2>${role.toUpperCase()}</h2>
+  <div>Name: ${name}</div>
+  <div>Email: ${email}/<div>
+  <div>Employee ID: ${id}</div>
+  <div> school: ${school}</div>
+  `;
+};
+
+module.exports = { engineerTemplate, managerTemplate, internTemplate};

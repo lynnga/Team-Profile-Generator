@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const Manager = require("./lib/Manager");
 const Engineer = require ("./lib/Engineer")
-
+const Intern = require ("./lib/Intern")
 const templates = require("./src/templates");
 
 const DIST = path.resolve(__dirname, "dist");
@@ -75,12 +75,37 @@ function createEngineer() {
     },
   ]);
 }
+function createIntern() {
+  return inquirer.prompt([
+    {
+      type: "input",
+      name: "internName",
+      message: "What is the intern's name?",
+    },
+    {
+      type: "input",
+      name: "internId",
+      message: "what is the interns's id?",
+    },
+    {
+      type: "input",
+      name: "internEmail",
+      message: "what is the interns's email?",
+    },
+    {
+      type: "input",
+      name: "school",
+      message: "what is the intern's school?",
+    },
+  ]);
+}
+
 function createTeam() {
   inquirer
     .prompt([
       {
         type: "list",
-        name: "teamMemeberChoice",
+        name: "teamMemberChoice",
         message: "which type of team member would you like to add?",
         choices: ["Engineer", "Intern", "I have finished my team"],
       },
@@ -101,6 +126,18 @@ function createTeam() {
           });
           break;
         case "Intern":
+          createIntern().then((answers) => {
+            const {internName, internId, internEmail, school} = answers;
+            const intern = new Intern(
+              internName,
+              internId,
+              internEmail,
+              school
+            );
+            team.push(intern);
+            createTeam ();
+          });
+          
           break;
         default:
           buildTeam();
@@ -113,9 +150,13 @@ function createHTML(teamArr) {
     if (teamMember.getRole() === "Manager") {
       htmlMain = htmlMain + templates.managerTemplate(teamMember);
     }
-    if(teamMember.getRole() ==="Engineer")
+    if(teamMember.getRole() ==="Engineer"){
     htmlMain = htmlMain + templates.engineerTemplate(teamMember)
-  });
+  }
+  if(teamMember.getRole() ==="Intern"){
+  htmlMain = htmlMain + templates.internTemplate(teamMember)
+  }
+});
   return htmlMain;
 }
 function buildTeam() {

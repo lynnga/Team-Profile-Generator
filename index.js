@@ -145,7 +145,17 @@ function createTeam() {
     });
 }
 function createHTML(teamArr) {
-  let htmlMain = ``;
+  let htmlMain = ` 
+  
+     
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+      <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+      
+ 
+
+  `
+  
+  
   teamArr.forEach((teamMember) => {
     if (teamMember.getRole() === "Manager") {
       htmlMain = htmlMain + templates.managerTemplate(teamMember);

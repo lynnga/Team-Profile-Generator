@@ -24,3 +24,13 @@ test('can get name from getName() method', () =>{
 const employee = new Employee("Lin", 30, "lingamliel@gmail.com");
 expect(employee.getName()).toBe("Lin");
 });
+
+test("can get employee_id()method", () => {
+  const employee = new Employee("Lin", 30);
+  expect(employee.employee_id).toBe(30);
+});
+
+test("can get email()method", () => {
+  const employee = new Employee("Lin", 30, "lingamliel@gmail.com");
+  expect(employee.email).toBe("lingamliel@gmail.com");
+});

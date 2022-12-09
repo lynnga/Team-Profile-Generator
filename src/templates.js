@@ -1,19 +1,24 @@
 const engineerTemplate = (engineer) => {
- 
-    const name = engineer.name;
-    const id = engineer.employee_id;
-    const email = engineer.email;
-    const role = engineer.getRole();
-    const github = engineer.getGithub();
+  const name = engineer.name;
+  const id = engineer.employee_id;
+  const email = engineer.email;
+  const role = engineer.getRole();
+  const github = engineer.getGithub();
 
-    return `
-  <h2>${role.toUpperCase()}</h2>
-    <div>Name: ${name}</div>
-    <div>Email: ${email}/<div>
-    <div>Employee ID: ${id}</div>
-    <div> Github: ${github}</div>
+  return `
+  
+  <div class="card" style="width: 18rem; margin:auto">
+  <div class="card-body">
+  <h5 class="card-title">${role.toUpperCase()}</h5> 
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Name:${name}</li>
+    <li class="list-group-item">Email:${email}</li>
+    <li class="list-group-item">ID:${id}</li>
+    <li class="list-group-item">Github:${github}</li>
+  </ul>
     `;
-  };
+};
 
 const managerTemplate = (manager) => {
   const name = manager.name;
@@ -23,15 +28,21 @@ const managerTemplate = (manager) => {
   const role = manager.getRole();
 
   return `
-  <h2>${role.toUpperCase()}</h2>
-    <div>Name: ${name}</div>
-    <div>Email: ${email}/<div>
-    <div>Employee ID: ${id}</div>
-    <div> Office Number: ${officeNumber}</div>
-    `;
+
+  <div class="card" style="width: 18rem; margin:auto">
+  <div class="card-body">
+ 
+  <h5 class="card-title">${role.toUpperCase()}</h5> 
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Name:${name}</li>
+    <li class="list-group-item">Email:${email}</li>
+    <li class="list-group-item">ID:${id}</li>
+    <li class="list-group-item">OfficeNumber:${officeNumber}</li>
+  </ul>
+`
 };
 const internTemplate = (intern) => {
- 
   const name = intern.name;
   const id = intern.employee_id;
   const email = intern.email;
@@ -39,12 +50,17 @@ const internTemplate = (intern) => {
   const school = intern.getSchool();
 
   return `
-<h2>${role.toUpperCase()}</h2>
-  <div>Name: ${name}</div>
-  <div>Email: ${email}/<div>
-  <div>Employee ID: ${id}</div>
-  <div> school: ${school}</div>
+  <div class="card" style="width: 18rem; margin: auto;">
+  <div class="card-body">
+  <h5 class="card-title">${role.toUpperCase()}</h5><i class="material-icons"></i>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">${name}</li>
+    <li class="list-group-item">${email}</li>
+    <li class="list-group-item">${id}</li>
+    <li class="list-group-item">${school}</li>
+  </ul>
   `;
 };
 
-module.exports = { engineerTemplate, managerTemplate, internTemplate};
+module.exports = { engineerTemplate, managerTemplate, internTemplate };
